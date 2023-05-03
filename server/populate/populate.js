@@ -7,7 +7,11 @@ const names = require("./names.json");
 const levels = require("./levels.json");
 const positions = require("./positions.json");
 const EmployeeModel = require("../db/employee.model");
-
+const EquipmentModel = require("../db/equipment.model");
+const equipmentNames = require("./name.json");
+const type = require("./type.json");
+const amount = require("./amount.json");
+//importurile plus jsonurile
 const mongoUrl = process.env.MONGO_URL;
 
 if (!mongoUrl) {
@@ -24,14 +28,30 @@ const populateEmployees = async () => {
     name,
     level: pick(levels),
     position: pick(positions),
+    equipment: pick(equipmentNames),
   }));
 
   await EmployeeModel.create(...employees);
   console.log("Employees created");
 };
 
+const populateEquipment = async () => {
+  await EquipmentModel.deleteMany({});
+
+  const equipment = equipmentNames.map(() => ({
+    name: pick(equipmentNames),
+    type: pick(type),
+    amount: pick(amount),
+  }));
+
+  await EquipmentModel.create(...equipment);
+  console.log("Equipment created");
+};
+
 const main = async () => {
   await mongoose.connect(mongoUrl);
+
+  await populateEquipment();
 
   await populateEmployees();
 
