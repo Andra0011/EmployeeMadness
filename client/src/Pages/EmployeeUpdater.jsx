@@ -18,6 +18,7 @@ const fetchEmployee = (id) => {
   return fetch(`/api/employees/${id}`).then((res) => res.json());
 };
 
+
 const EmployeeUpdater = () => {
   const { id } = useParams();
   const navigate = useNavigate();

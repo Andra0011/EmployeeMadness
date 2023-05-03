@@ -1,4 +1,7 @@
+import { useEffect, useState } from "react";
+
 const EmployeeForm = ({ onSave, disabled, employee, onCancel }) => {
+  const [equipment, setEquipment] = useState([]);
   const onSubmit = (e) => {
     e.preventDefault();
     const formData = new FormData(e.target);
@@ -9,9 +12,20 @@ const EmployeeForm = ({ onSave, disabled, employee, onCancel }) => {
       acc[k] = v;
       return acc;
     }, {});
-
+ console.log(employee)
     return onSave(employee);
   };
+  const fetchEquipment = () => {
+    return fetch(`/api/equipment`).then((res) => res.json());
+  };
+  
+  useEffect(() => {
+    fetchEquipment()
+    .then((equipment) => {
+      setEquipment(equipment);
+      console.log(equipment);
+    });
+  },[]);
 
   return (
     <form className="EmployeeForm" onSubmit={onSubmit}>
@@ -44,6 +58,13 @@ const EmployeeForm = ({ onSave, disabled, employee, onCancel }) => {
           name="position"
           id="position"
         />
+      </div>
+      <div className="control">
+        <label htmlFor="equipment">Equipment:</label>
+          <select name="equipment" id="equipment">
+            {equipment.map((equipment,index)=> <option key={index}>{equipment.name}</option>)}
+          </select>
+
       </div>
 
       <div className="buttons">
