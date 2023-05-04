@@ -1,7 +1,9 @@
 import { useEffect, useState } from "react";
 
-const EmployeeForm = ({ onSave, disabled, employee, brand, onCancel }) => {
+const EmployeeForm = ({ onSave, disabled, employee, onCancel }) => {
   const [equipment, setEquipment] = useState([]);
+  const [brand, setBrand] = useState([]);
+
   const onSubmit = (e) => {
     e.preventDefault();
     const formData = new FormData(e.target);
@@ -12,6 +14,11 @@ const EmployeeForm = ({ onSave, disabled, employee, brand, onCancel }) => {
       acc[k] = v;
       return acc;
     }, {});
+    for (let b of brand){
+      if(b.name == employee.brand){
+        employee.brand = b._id
+      }
+    }
  console.log(employee)
     return onSave(employee);
   };
@@ -19,11 +26,23 @@ const EmployeeForm = ({ onSave, disabled, employee, brand, onCancel }) => {
     return fetch(`/api/equipment`).then((res) => res.json());
   };
   
+  const fetchBrand = () => {
+    return fetch(`/api/brand`).then((res) => res.json());
+  };
+
   useEffect(() => {
     fetchEquipment()
     .then((equipment) => {
       setEquipment(equipment);
       console.log(equipment);
+    });
+  },[]);
+
+  useEffect(() => {
+    fetchBrand()
+    .then((brand) => {
+      setBrand(brand);
+      console.log(brand);
     });
   },[]);
 
@@ -68,8 +87,8 @@ const EmployeeForm = ({ onSave, disabled, employee, brand, onCancel }) => {
       </div>
       <div className="control">
         <label htmlFor="brand">Brand:</label>
-          <select id="selectBrand">
-            {brand?.map((brands,index)=>
+          <select id="selectBrand" name= "brand">
+            {brand.map((brands,index)=>
              <option key={index}>{brands.name}</option>)}
           </select>
 

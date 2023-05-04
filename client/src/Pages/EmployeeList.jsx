@@ -64,7 +64,7 @@ const EmployeeList = () => {
 
   useEffect(() => {
     fetchEmployees()
-      .then((employees) => {
+      .then((employees) => {console.log(employees)
         setLoading(false);
         setFilteredEmployees(employees);
         setEmployees(employees);

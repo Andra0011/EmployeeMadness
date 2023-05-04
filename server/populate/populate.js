@@ -25,6 +25,7 @@ const pick = (from) => from[Math.floor(Math.random() * (from.length - 0))];
 
 const populateEmployees = async () => {
   await EmployeeModel.deleteMany({});
+  
   let brands = await BrandModel.find({})
   brands = brands.map(brand => brand._id)
 
@@ -68,10 +69,11 @@ const main = async () => {
   await mongoose.connect(mongoUrl);
 
   await populateEquipment();
+  
+  await populateBrands();
 
   await populateEmployees();
 
-  await populateBrands();
 
   await mongoose.disconnect();
 };
