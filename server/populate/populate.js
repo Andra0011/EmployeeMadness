@@ -11,7 +11,9 @@ const EquipmentModel = require("../db/equipment.model");
 const equipmentNames = require("./name.json");
 const type = require("./type.json");
 const amount = require("./amount.json");
-//importurile plus jsonurile
+const BrandModel = require("../db/brand.model");
+const brand = require("./brands.json");
+
 const mongoUrl = process.env.MONGO_URL;
 
 if (!mongoUrl) {
@@ -23,12 +25,15 @@ const pick = (from) => from[Math.floor(Math.random() * (from.length - 0))];
 
 const populateEmployees = async () => {
   await EmployeeModel.deleteMany({});
+  let brands = await BrandModel.find({})
+  brands = brands.map(brand => brand._id)
 
   const employees = names.map((name) => ({
     name,
     level: pick(levels),
     position: pick(positions),
     equipment: pick(equipmentNames),
+    brand: pick(brands)
   }));
 
   await EmployeeModel.create(...employees);
@@ -48,12 +53,25 @@ const populateEquipment = async () => {
   console.log("Equipment created");
 };
 
+const populateBrands = async () => {
+  await BrandModel.deleteMany({});
+
+  const brands = brand.map((brandname) => ({
+    name: brandname
+  }));
+
+  await BrandModel.create(...brands);
+  console.log("Brands created");
+};
+
 const main = async () => {
   await mongoose.connect(mongoUrl);
 
   await populateEquipment();
 
   await populateEmployees();
+
+  await populateBrands();
 
   await mongoose.disconnect();
 };

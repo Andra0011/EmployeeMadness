@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 
-const EmployeeForm = ({ onSave, disabled, employee, onCancel }) => {
+const EmployeeForm = ({ onSave, disabled, employee, brand, onCancel }) => {
   const [equipment, setEquipment] = useState([]);
   const onSubmit = (e) => {
     e.preventDefault();
@@ -63,6 +63,14 @@ const EmployeeForm = ({ onSave, disabled, employee, onCancel }) => {
         <label htmlFor="equipment">Equipment:</label>
           <select name="equipment" id="equipment">
             {equipment.map((equipment,index)=> <option key={index}>{equipment.name}</option>)}
+          </select>
+
+      </div>
+      <div className="control">
+        <label htmlFor="brand">Brand:</label>
+          <select id="selectBrand">
+            {brand?.map((brands,index)=>
+             <option key={index}>{brands.name}</option>)}
           </select>
 
       </div>
