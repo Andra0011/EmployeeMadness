@@ -45,7 +45,7 @@ const EmployeeForm = ({ onSave, disabled, employee, onCancel }) => {
       console.log(brand);
     });
   },[]);
-
+console.log(employee)
   return (
     <form className="EmployeeForm" onSubmit={onSubmit}>
       {employee && (
@@ -80,14 +80,14 @@ const EmployeeForm = ({ onSave, disabled, employee, onCancel }) => {
       </div>
       <div className="control">
         <label htmlFor="equipment">Equipment:</label>
-          <select name="equipment" id="equipment">
+          <select name="equipment" id="equipment" value={employee ? employee.equipment : null}>
             {equipment.map((equipment,index)=> <option key={index}>{equipment.name}</option>)}
           </select>
 
       </div>
       <div className="control">
         <label htmlFor="brand">Brand:</label>
-          <select id="selectBrand" name= "brand">
+          <select id="selectBrand" name= "brand" value={employee ? employee.brand.name : null}>
             {brand.map((brands,index)=>
              <option key={index}>{brands.name}</option>)}
           </select>

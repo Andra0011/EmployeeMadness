@@ -32,7 +32,7 @@ app.get("/api/brand/", async (req, res) => {
 });
 
 app.get("/api/employees/:id", async (req, res) => {
-  const employee = await EmployeeModel.findById(req.params.id);
+  const employee = await EmployeeModel.findById(req.params.id).populate("brand");
   return res.json(employee);
 });
 
