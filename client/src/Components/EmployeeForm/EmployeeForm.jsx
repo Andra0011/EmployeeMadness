@@ -14,6 +14,7 @@ const EmployeeForm = ({ onSave, disabled, employee, onCancel }) => {
       acc[k] = v;
       return acc;
     }, {});
+    //replace brand name with brand id
     for (let b of brand){
       if(b.name == employee.brand){
         employee.brand = b._id
