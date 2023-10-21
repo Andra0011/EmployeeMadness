@@ -1,5 +1,27 @@
 # Employee Data
+## Project Description
+This is a solo project where I learned to use advanced MERN stack operations and routing. The project focuses on managing employee data for a company, allowing a wide variety of operations on its database.
 
+![image](https://github.com/Andra0011/EmployeeMadness/assets/116810687/0f652a59-98ff-4656-8888-a6619151029a)
+![image](https://github.com/Andra0011/EmployeeMadness/assets/116810687/d51fffe1-1e63-4238-bbb2-4dcc1945c5c7)
+
+### Technologies Used
+
+I utilized the following technologies:
+
+- **Node.js**: A runtime environment for server-side JavaScript execution.
+- **Express.js**: Backend development, creating APIs.
+- **MongoDB**: Storing user data and employee information.
+- **React**: Dynamic UI components.
+- **Bootstrap**: Responsive styling.
+- **CSS**: Custom styling.
+
+### Challenges
+
+Challenges faced during development:
+
+- Designing a well-structured architecture, considering the large number of components.
+- Ensuring that functionalities do not interfere with each other.
 ## Server side
 
 ### Install dependencies
